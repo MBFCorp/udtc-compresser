@@ -7,7 +7,7 @@ import java.util.Arrays;
 import java.util.LinkedList;
 
 /**
- * Compresses text by turn bytes of the text into variable-width bytes, as
+ * Compresses data by turning bytes of the text into variable-width bytes, as
  * pre-defined in each data's dictionary. <br>
  * Example:
  * 
@@ -31,7 +31,7 @@ import java.util.LinkedList;
  * @author Mateus de Aquino
  */
 
-public class Compresser {
+public class Compressor {
 
 	/**
 	 * 
