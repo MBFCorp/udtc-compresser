@@ -4,6 +4,7 @@ bytes of the text into variable-width bytes.
 Each new variable-width byte will be stored in a "dictionary" structure inside
 the file.
 
+## How it works
 <pre>
 dict| byte
 ----|---------
@@ -13,6 +14,26 @@ dict| byte
 
 Turns: 01110100 01100101 01110011 01110100
 Into : dict + 10 00 01 10
-
-(Works better for huge texts)
 </pre>
+
+The more distinct bytes, the greater the result. <br>
+The more bytes overall, the smaller the result. <br>
+
+## Example
+```java
+    String str = "huuuuuuuuge texts is better at times";
+	   String cstr = Compressor.toUDTC(str); // compresses str
+	   str = Compressor.bin(str); // returns str in binary
+    
+    System.out.println("DEFAULT: " + str);
+    System.out.println("UDTC   : " + cstr);
+```
+
+## Todo
+- [X] Make a ```compress()``` method
+- [ ] Make a ```decompress()``` method
+- [ ] Make an ```isCompressed()``` method
+- [ ] Add file supporting
+- [ ] Mix UDTC with redundant information removal (nnnn -> 4n)
+- [ ] Phasing support (try to compress twice)
+- [ ] Fix data overflow
