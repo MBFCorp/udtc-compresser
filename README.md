@@ -21,12 +21,12 @@ The more bytes overall, the smaller the result. <br>
 
 ## Example
 ```java
-String str = "huuuuuuuuge texts is better at times";
+String str = "huuuuuuuuge texts are better at times";
 String cstr = Compressor.toUDTC(str); // compresses str
 str = Compressor.bin(str); // returns str in binary
 
-System.out.println("DEFAULT: " + str); // 36bytes
-System.out.println("UDTC   : " + cstr); // 32bytes
+System.out.println("DEFAULT: " + str); // 37bytes
+System.out.println("UDTC   : " + cstr); // 33bytes
 ```
 
 ## Todo
