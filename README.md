@@ -1,2 +1,3 @@
-# upc-compresser
-Unicode [Binary] Phases Compresser
+# __U__nicode [Binary] __D__ictionary __C__ompresser
+----
+
