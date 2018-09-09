@@ -19,7 +19,7 @@ import java.util.LinkedList;
  *  10 | 01110100
  * 
  * Turns: 01110100 01100101 01110011 01110100
- * Into : dictionary + 10 00 01 10
+ * Into : dict + 10 00 01 10
  * 
  * (Works better for huge texts)
  * </pre>
@@ -27,18 +27,16 @@ import java.util.LinkedList;
  * The more distinct bytes, the greater the result. <br>
  * The more bytes overall, the smaller the result. <br>
  * <br>
+ * P.B. returns the string itself if the compressor wasn't efficient (dictionary too large for short texts).
  * 
  * @author Mateus de Aquino
  */
 
 public class Compressor {
 
-	/**
-	 * 
-	 * Example(ex.: 0101 0101 <i>turns to</i> 000 as pre-defined). <br>
-	 * 
-	 * 
-	 * 
+	/** 
+	 * Compresses the string. <br>
+
 	 * @param str
 	 *            - Uncompressed string
 	 * @param bin
@@ -46,12 +44,27 @@ public class Compressor {
 	 *            text
 	 * @return Compressed text (encoded)
 	 * @author Mateus de Aquino
-	 * @throws InvalidByteException
 	 */
 
 	public static String toUDTC(String str, boolean bin) {
 		if (str.isEmpty())
+			return str; 
+		String result = toUDTC(str);
+		return (bin) ? result : unbin(result.getBytes());
+	}
+
+	/** 
+	 * Compresses the string and returns binary value. <br>
+
+	 * @param str
+	 *            - Uncompressed string
+	 * @return Compressed text (encoded)
+	 * @author Mateus de Aquino
+	 */
+	public static String toUDTC(String str) {
+		if (str.isEmpty())
 			return str;
+		int dfltSize = bin(str).length();
 		StringBuilder ubpc = new StringBuilder();
 		LinkedList<Integer> dict, bytes = new LinkedList<Integer>();
 		for (byte c : str.getBytes(StandardCharsets.UTF_8)) {
@@ -70,11 +83,7 @@ public class Compressor {
 		ubpc.append(pad(Integer.parseInt(bin(dict.get(0))), 8)); // [GS]
 		// dados
 		bytes.forEach(e -> ubpc.append(pad(Integer.parseInt(bin(dict.indexOf(e))), bytelength)));
-
-		if (bin)
-			return ubpc.toString();
-		else
-			return new String(unbin(ubpc.toString().getBytes()));
+		return (dfltSize > ubpc.length()) ? ubpc.toString() : bin(str);
 	}
 
 	public static String decompress(int[] unsignedBytes) {
