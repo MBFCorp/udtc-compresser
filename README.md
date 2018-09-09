@@ -30,8 +30,8 @@ The more bytes overall, the smaller the result. <br>
 ```
 
 ## Todo
-- [X] Make a ```compress()``` method
-- [ ] Make a ```decompress()``` method
+- [X] Make a ```toUDTC()``` method
+- [ ] Make a ```fromUDTC()``` method
 - [ ] Make an ```isCompressed()``` method
 - [ ] Add file supporting
 - [ ] Mix UDTC with redundant information removal (nnnn -> 4n)
